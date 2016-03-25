@@ -41,10 +41,12 @@ code {
 
 .page-header {
 	text-align: center;
+	color: white;
 }
 
 .lead {
 	text-align: center;
+	color: white;
 }
 
 .subtext {
@@ -58,3 +60,12 @@ code {
 .fa .fa-circle-o .fa-stack-2x {
 	
 }
+
+/*Home page background image*/
+#homepage {
+	background-image: url(../img/homeBG.jpg);
+	background-size: 100%;
+	margin-bottom: 25%;
+	padding-bottom: 25%;
+}
+	
