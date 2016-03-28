@@ -50,22 +50,18 @@ code {
 }
 
 .subtext {
+	color:white;
 	text-align: center;
 }
 
-.fa .fa-mapmarker .fa-stack-1x {
-	
-}
-
-.fa .fa-circle-o .fa-stack-2x {
-	
+.subtext a {
+	color:white;
+	text-decoration: underline;
 }
 
 /*Home page background image*/
-#homepage {
+.homepage {
 	background-image: url(../img/homeBG.jpg);
 	background-size: 100%;
-	margin-bottom: 25%;
-	padding-bottom: 25%;
 }
 	

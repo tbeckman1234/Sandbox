@@ -1,3 +1,41 @@
+<?php
+    	if (isset($_POST["submit"])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+        $from = 'Its Around 420 Contact Form'; 
+        $to = 'web@thegreengrowers.com'; 
+        $subject = "Message from It's Around 420 contact page";
+        
+        $body = "From: $name\n E-Mail: $email\n Message:\n $message";
+        
+        // Check if name has been entered
+        if (!$_POST['name']) {
+            $errName = 'Please enter your name';
+        }
+        
+        // Check if email has been entered and is valid
+        if (!$_POST['email'] || !filter_var($_POST['email'], 			FILTER_VALIDATE_EMAIL)) {
+            $errEmail = 'Please enter a valid email address';
+        }
+        
+        //Check if message has been entered
+        if (!$_POST['message']) {
+            $errMessage = 'Please enter your message';
+        }
+        
+        /* If there are no errors, send the email*/
+if (!$errName && !$errEmail && !$errMessage) {
+    if (mail ($to, $subject, $body, $from)) {
+        $result='<div class="alert alert-success">Thank You! We will be in touch</div>';
+    } else {
+        $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+    }
+}
+    }
+     
+    ?> 
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,7 +84,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span class="fa-stack">
+          <a class="navbar-brand" href="index.html"><span class="fa-stack">
   <i class="fa fa-circle-o fa-stack-2x"></i>
   <i class="fa fa-map-marker fa-stack-1x"></i>
 </span> It's Around 420</a>
@@ -58,7 +96,7 @@
             <li><a href="colorado.html">Colorado</a></li>
             <li><a href="washington.html">Washington</a></li>
             <li><a href="california.html">California</a></li>
-            <li class="active"><a href="contact.html">Contact Us</a></li>
+            <li class="active"><a href="contact.php">Contact Us</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -72,32 +110,40 @@
     	<div class="jumbotron">
         	<h2><i class="fa fa-envelope-o"></i> Send us  an Email </h2>
             <br>
+        <form class="form-horizontal" role="form" method="post" action="contact.php">
             <div class="form-group">
-              <label for="name">Enter your name:</label>
-              <input type="text" class="form-control" id="name">
+              <label for="name" class="control-label">Enter your name:</label>
+              <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($_POST['name']); ?>">
+              <?php echo "<p class='text-danger'>$errName</p>";?>
             </div>
         	<div class="form-group">
-              <label for="email">Enter your email address:</label>
-              <input type="text" class="form-control" id="email">
+              <label for="email" class="control-label">Enter your email address:</label>
+              <input type="text" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($_POST['email']); ?>">
+              <?php echo "<p class='text-danger'>$errEmail</p>";?>
             </div>
         	<div class="form-group">
-              <label for="message">Enter your message:</label>
-              <textarea class="form-control" rows="5" id="message"></textarea>
+              <label for="message" class="control-label">Enter your message:</label>
+              <textarea class="form-control" rows="5" id="message" name="message" value="<?php echo htmlspecialchars($_POST['message']);?>"></textarea>
+              <?php echo "<p class='text-danger'>$errMessage</p>";?>
             </div>
             <br>
-            <button type="button" class="btn btn-success"><i class="fa fa-send"></i> Send</button>
+         	<div class="form-group">
+            <button type="submit" class="btn btn-success" name="submit" id="submit"><i class="fa fa-send"></i> Send</button>
+        	</div>
+            <div class="form-group">
+						<div>
+							<?php echo $result; ?>	
+						</div>
+					</div>
+            </form>
         </div>
-    </div>
-    
-    
-    
+     </div>
     
     <footer class="footer">
       <div class="container">
         <p class="text-muted">The Green Growers 2016 <i class="fa fa-copyright"></i></p>
       </div>
     </footer>
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
